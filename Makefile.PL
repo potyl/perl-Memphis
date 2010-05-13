@@ -24,7 +24,7 @@ sub main {
 	# The version of memphis for which this module can built against
 	my $memphis_version = '0.2';
 	
-	# Find libchamplain
+	# Find libmemphis
 	my @typemaps = ();
 	my @deps = ('Glib');
 	my %pkgconfig;
@@ -51,7 +51,7 @@ sub main {
 	Glib::CodeGen->parse_maps('memphis', input => [ @typemaps ]);
 	Glib::CodeGen->write_boot(
 		xs_files => [ @XS_FILES ],
-		ignore   => qr/^Champlain$/,
+		ignore   => qr/^Memphis$/,
 	);
 	
 	
@@ -59,11 +59,11 @@ sub main {
 	$DEPENDS->set_libs($pkgconfig{libs});
 	$DEPENDS->add_xs(@XS_FILES);
 	$DEPENDS->add_typemaps(
-		File::Spec->catfile(cwd(), 'build', 'champlain.typemap')
+		File::Spec->catfile(cwd(), 'build', 'memphis.typemap')
 	);
 	$DEPENDS->install(
-		File::Spec->catfile('build', 'champlain-autogen.h'),
-		'champlain-perl.h',
+		File::Spec->catfile('build', 'memphis-autogen.h'),
+		'memphis-perl.h',
 	);
 	$DEPENDS->save_config(File::Spec->catfile('build', 'IFiles.pm'));
 	
@@ -71,9 +71,9 @@ sub main {
 	# Create the Makefile
 	WriteMakefile(
 		AUTHOR        => 'Emmanuel Rodriguez <potyl@cpan.org>',
-		NAME          => 'Champlain',
-		VERSION_FROM  => File::Spec->catfile('lib', 'Champlain.pm'),
-		ABSTRACT_FROM => File::Spec->catfile('lib', 'Champlain.pm'),
+		NAME          => 'Memphis',
+		VERSION_FROM  => File::Spec->catfile('lib', 'Memphis.pm'),
+		ABSTRACT_FROM => File::Spec->catfile('lib', 'Memphis.pm'),
 		LICENSE       => 'perl, lgpl',
 
 		PREREQ_PM     => {
