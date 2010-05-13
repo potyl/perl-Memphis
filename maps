@@ -1,2 +1,5 @@
 MEMPHIS_TYPE_DATA_POOL                    MemphisDataPool                  GObject    Memphis::DataPool
 MEMPHIS_TYPE_MAP                          MemphisMap                       GObject    Memphis::Map
+MEMPHIS_TYPE_RENDERER                     MemphisRenderer                  GObject    Memphis::Renderer
+MEMPHIS_TYPE_RULE                         MemphisRule                      GObject    Memphis::Rule
+MEMPHIS_TYPE_RULE_SET                     MemphisRuleSet                   GObject    Memphis::RuleSet
