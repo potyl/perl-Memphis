@@ -1,7 +1,7 @@
 #ifndef _MEMPHIS_PERL_H_
 #define _MEMPHIS_PERL_H_
 
-#include <glib-perl.h>
+#include <gperl.h>
 
 #include <memphis/memphis.h>
 
