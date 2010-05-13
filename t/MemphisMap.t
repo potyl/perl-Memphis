@@ -21,7 +21,8 @@ sub main {
 		[0, 0, 0, 0],
 		"get_bounding_box"
 	);
-	
+
+
 	my $file = File::Spec->catfile($FindBin::Bin, 'map.osm');
 	$map->load_from_file($file);
 	pass("load_from_file");
@@ -33,7 +34,7 @@ sub main {
 		is_float($got, $expected, 0.1, "get_bounding_box from load_from_file");
 	}
 
-	
+
 	$map = Memphis::Map->new();
 	$map->load_from_data(slurp($file));
 	pass("load_from_data");
