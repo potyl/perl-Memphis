@@ -3,3 +3,4 @@ MEMPHIS_TYPE_MAP                          MemphisMap                       GObje
 MEMPHIS_TYPE_RENDERER                     MemphisRenderer                  GObject    Memphis::Renderer
 MEMPHIS_TYPE_RULE                         MemphisRule                      GBoxed     Memphis::Rule
 MEMPHIS_TYPE_RULE_SET                     MemphisRuleSet                   GObject    Memphis::RuleSet
+MEMPHIS_TYPE_RULE_TYPE                    MemphisRuleType                  GEnum      Memphis::RuleType
