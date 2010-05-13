@@ -1,1 +1,2 @@
 MEMPHIS_TYPE_DATA_POOL                    MemphisDataPool                  GObject    Memphis::DataPool
+MEMPHIS_TYPE_MAP                          MemphisMap                       GObject    Memphis::Map
