@@ -26,7 +26,7 @@ sub main {
 	
 	# Find libmemphis
 	my @typemaps = ();
-	my @deps = ('Glib');
+	my @deps = ('Glib', 'Cairo');
 	my %pkgconfig;
 
 	eval {
@@ -79,6 +79,7 @@ sub main {
 		PREREQ_PM     => {
 			# NOTE: Other versions of glib might work, I've only tested with this one!
 			'Glib' => '1.222',
+			'Cairo' => '1.000',
 		},
 		PREREQ_FATAL  => 1, # Glib is mandatory otherwise the Makefile can't be created
 		
