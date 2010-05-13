@@ -73,7 +73,7 @@ memphis_map_get_bounding_box (MemphisMap *map)
 		        minlon = 0,
 		        maxlat = 0,
 		        maxlon = 0;
-	
+
 	PPCODE:
 		memphis_map_get_bounding_box(map, &minlat, &minlon, &maxlat, &maxlon);
 		EXTEND(SP, 4);
