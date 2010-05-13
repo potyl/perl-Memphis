@@ -2,6 +2,7 @@
 #define _MEMPHIS_PERL_H_
 
 #include <gperl.h>
+#include <cairo-perl.h>
 
 #include <memphis/memphis.h>
 
