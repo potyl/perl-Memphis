@@ -1,4 +1,4 @@
-/* Clutter.
+/* Memphis.
  *
  * Perl bindings for libmemphis; a generic glib/cairo based OSM renderer
  * library. It draws maps on arbitrary cairo surfaces. 
@@ -22,6 +22,9 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+
+
+#include "memphis-perl.h"
 
 
 MODULE = Memphis::DataPool  PACKAGE = Memphis::DataPool  PREFIX = memphis_data_pool_
