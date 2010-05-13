@@ -41,3 +41,59 @@ memphis_rule_copy (const MemphisRule *rule)
 
 void
 memphis_rule_free (MemphisRule *rule)
+
+
+#
+# Provide nice accessors and modifiers to the data members of the struct.
+#
+void
+keys (MemphisRule *rule, ...)
+	ALIAS:
+		values = 1
+
+	PREINIT:
+		gchar **list = NULL;
+		gchar **iter = NULL;
+
+	PPCODE:
+		switch (ix) {
+			case 0:
+				list = rule->keys;
+			break;
+
+			case 1:
+				list = rule->values;
+			break;
+		}
+
+		if (items > 1) {
+			size_t i;
+			if (list != NULL) {
+				for (iter = list; *iter != NULL; ++iter) {
+					g_free(*iter);
+				}
+				g_free(list);
+			}
+
+			list = g_new(char *, items);
+			list[items - 1] = NULL;
+			for (i = 0; i < items - 1; ++i) {
+				list[i] = g_strdup(SvGChar(ST(i + 1)));
+			}
+		}
+
+		if (list != NULL) {
+			for (iter = list; *iter != NULL; ++iter) {
+				XPUSHs(sv_2mortal(newSVGChar(*iter)));
+			}
+		}
+
+		switch (ix) {
+			case 0:
+				rule->keys = list;
+			break;
+
+			case 1:
+				rule->values = list;
+			break;
+		}
