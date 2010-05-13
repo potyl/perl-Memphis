@@ -1,10 +1,10 @@
 /* Memphis.
  *
  * Perl bindings for libmemphis; a generic glib/cairo based OSM renderer
- * library. It draws maps on arbitrary cairo surfaces. 
+ * library. It draws maps on arbitrary cairo surfaces.
  *
  * Perl bindings by Emmanuel Rodriguez <emmanuel.rodriguez@gmail.com>
- * 
+ *
  * Copyright (C) 2010 Emmanuel Rodriguez
  *
  * This library is free software; you can redistribute it and/or
