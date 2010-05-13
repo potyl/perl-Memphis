@@ -1,0 +1,6 @@
+xs/*.[co]
+blib
+build
+pm_to_blib
+Makefile
+*.bs
