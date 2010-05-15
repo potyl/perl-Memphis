@@ -44,7 +44,7 @@ memphis_rule_free (MemphisRule *rule)
 
 
 #
-# Provide nice accessors and modifiers to the data members of the struct.
+# Accessor for the struct members that handle string lists.
 #
 void
 keys (MemphisRule *rule, ...)
@@ -99,19 +99,8 @@ keys (MemphisRule *rule, ...)
 		}
 
 
-#
-# Provide nice accessors and modifiers to the data members of the struct.
-#
 SV*
 type (MemphisRule *rule, ...)
-	ALIAS:
-		polygon = 1
-		line    = 2
-		border  = 3
-		text    = 4
-
-	PREINIT:
-
 	CODE:
 		switch (ix) {
 			case 0:
