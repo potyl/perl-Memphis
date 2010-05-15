@@ -97,3 +97,33 @@ keys (MemphisRule *rule, ...)
 				rule->values = list;
 			break;
 		}
+
+
+#
+# Provide nice accessors and modifiers to the data members of the struct.
+#
+SV*
+type (MemphisRule *rule, ...)
+	ALIAS:
+		polygon = 1
+		line    = 2
+		border  = 3
+		text    = 4
+
+	PREINIT:
+
+	CODE:
+		switch (ix) {
+			case 0:
+				RETVAL = newSVMemphisRuleType(rule->type);
+				if (items > 1) rule->type = SvMemphisRuleType(ST(1));
+			break;
+
+			default:
+				RETVAL = &PL_sv_undef;
+				g_assert_not_reached();
+			break;
+		}
+
+	OUTPUT:
+		RETVAL
