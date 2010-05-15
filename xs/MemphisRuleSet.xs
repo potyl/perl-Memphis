@@ -39,24 +39,70 @@ void
 memphis_rule_set_free (MemphisRuleSet *rules)
 
 
-#void
-#memphis_rule_set_load_from_file (MemphisRuleSet *rules, const gchar *filename)
+void
+memphis_rule_set_load_from_file (MemphisRuleSet *rules, const gchar *filename)
+	PREINIT:
+		GError *error = NULL;
+
+	CODE:
+		memphis_rule_set_load_from_file(rules, filename, &error);
+		if (error) {
+			gperl_croak_gerror (NULL, error);
+		}
 
 
-#void
-#memphis_rule_set_load_from_data (MemphisRuleSet *rules, SV *sv_data)
+void
+memphis_rule_set_load_from_data (MemphisRuleSet *rules, SV *sv_data)
+	PREINIT:
+		STRLEN length;
+		char *data;
+		GError *error = NULL;
+
+	CODE:
+		data = SvPV(sv_data, length);
+		memphis_rule_set_load_from_data (rules, data, length, &error);
+		if (error) {
+			gperl_croak_gerror (NULL, error);
+		}
 
 
 void
 memphis_rule_set_set_bg_color (MemphisRuleSet *rules, guint8 r, guint8 g, guint8 b, guint8 a)
 
 
-#void
-#memphis_rule_set_get_bg_color (MemphisRuleSet *rules, guint8 *r, guint8 *g, guint8 *b, guint8 *a)
+void
+memphis_rule_set_get_bg_color (MemphisRuleSet *rules)
+	PREINIT:
+		guint8 r, g, b, a;
+
+	PPCODE:
+		memphis_rule_set_get_bg_color(rules, &r, &g, &b, &a);
+		EXTEND (SP, 4);
+		PUSHs (sv_2mortal (newSViv (r)));
+		PUSHs (sv_2mortal (newSViv (g)));
+		PUSHs (sv_2mortal (newSViv (b)));
+		PUSHs (sv_2mortal (newSViv (a)));
+		PERL_UNUSED_VAR (ax);
 
 
-#GList*
-#memphis_rule_set_get_rule_ids (MemphisRuleSet *rules)
+void
+memphis_rule_set_get_rule_ids (MemphisRuleSet *rules)
+	PREINIT:
+		GList *list = NULL;
+		GList *item = NULL;
+
+	PPCODE:
+		list = memphis_rule_set_get_rule_ids(rules);
+		if (!list) {
+			XSRETURN_EMPTY;
+		}
+
+		for (item = list; item != NULL; item = item->next) {
+			gchar *id = (gchar *) item->data;
+			XPUSHs(sv_2mortal(newSVGChar(id)));
+		}
+
+		g_list_free(list);
 
 
 void
