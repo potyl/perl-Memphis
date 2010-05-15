@@ -102,17 +102,8 @@ keys (MemphisRule *rule, ...)
 SV*
 type (MemphisRule *rule, ...)
 	CODE:
-		switch (ix) {
-			case 0:
-				RETVAL = newSVMemphisRuleType(rule->type);
-				if (items > 1) rule->type = SvMemphisRuleType(ST(1));
-			break;
-
-			default:
-				RETVAL = &PL_sv_undef;
-				g_assert_not_reached();
-			break;
-		}
+		RETVAL = newSVMemphisRuleType(rule->type);
+		if (items > 1) rule->type = SvMemphisRuleType(ST(1));
 
 	OUTPUT:
 		RETVAL
