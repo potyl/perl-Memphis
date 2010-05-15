@@ -30,12 +30,12 @@
 MODULE = Memphis::Renderer  PACKAGE = Memphis::Renderer  PREFIX = memphis_renderer_
 
 
-MemphisRenderer*
+MemphisRenderer_noinc*
 memphis_renderer_new (class)
 	C_ARGS: /* No args */
 
 
-MemphisRenderer*
+MemphisRenderer_noinc*
 memphis_renderer_new_full (class, MemphisRuleSet *rules, MemphisMap *map)
 	C_ARGS: rules, map
 

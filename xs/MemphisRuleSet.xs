@@ -30,7 +30,7 @@
 MODULE = Memphis::RuleSet  PACKAGE = Memphis::RuleSet  PREFIX = memphis_rule_set_
 
 
-MemphisRuleSet*
+MemphisRuleSet_noinc*
 memphis_rule_set_new (class)
 	C_ARGS: /* No args */
 

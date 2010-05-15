@@ -30,7 +30,7 @@
 MODULE = Memphis::Map  PACKAGE = Memphis::Map  PREFIX = memphis_map_
 
 
-MemphisMap*
+MemphisMap_noinc*
 memphis_map_new (class)
 	C_ARGS: /* No args */
 

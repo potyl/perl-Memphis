@@ -41,6 +41,8 @@ memphis_rule_copy (const MemphisRule *rule)
 
 void
 memphis_rule_free (MemphisRule *rule)
+ALIAS:
+	DESTROY = 1
 
 
 #

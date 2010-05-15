@@ -30,6 +30,6 @@
 MODULE = Memphis::DataPool  PACKAGE = Memphis::DataPool  PREFIX = memphis_data_pool_
 
 
-MemphisDataPool*
+MemphisDataPool_noinc*
 memphis_data_pool_new (class)
 	C_ARGS: /* No args */
