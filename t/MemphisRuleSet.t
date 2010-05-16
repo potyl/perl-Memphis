@@ -91,12 +91,12 @@ sub generic_test {
 	my $rule = $rule_set->get_rule('highway:motorway');
 	isa_ok($rule, 'Memphis::Rule');
 	is_deeply(
-		[ $rule->keys ],
+		$rule->keys,
 		[ 'highway' ],
 		"rule->keys",
 	);
 	is_deeply(
-		[ $rule->values ],
+		$rule->values,
 		[ 'motorway' ],
 		"rule->values",
 	);

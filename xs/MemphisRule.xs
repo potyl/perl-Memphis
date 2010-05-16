@@ -55,7 +55,6 @@ keys (MemphisRule *rule, ...)
 
 	PREINIT:
 		gchar **list = NULL;
-		gchar **iter = NULL;
 
 	PPCODE:
 		switch (ix) {
@@ -69,7 +68,18 @@ keys (MemphisRule *rule, ...)
 		}
 
 		if (items > 1) {
+			SV *sv_data = ST(1);
+			AV *av;
+			gchar **iter;
+			gsize length;
 			size_t i;
+
+			if (SvTYPE(SvRV(sv_data)) != SVt_PVAV) {
+				croak("Arguments must be passed as an arrayref");
+			}
+
+
+			/* Free the previous data */
 			if (list != NULL) {
 				for (iter = list; *iter != NULL; ++iter) {
 					g_free(*iter);
@@ -77,27 +87,39 @@ keys (MemphisRule *rule, ...)
 				g_free(list);
 			}
 
-			list = g_new(char *, items);
-			list[items - 1] = NULL;
-			for (i = 0; i < items - 1; ++i) {
-				list[i] = g_strdup(SvGChar(ST(i + 1)));
+
+			/* Convert the Perl array into a C array of strings */
+			av = (AV*) SvRV(sv_data);
+			length = av_len(av) + 2; /* last index + extra NULL padding */
+
+			list = g_new(gchar *, length);
+			list[length - 1] = NULL;
+			for (i = 0; i < length - 1; ++i) {
+				SV **data_sv = av_fetch(av, i, FALSE);
+				list[i] = strdup(SvGChar(*data_sv));
+			}
+
+			/* Save back the new list */
+			switch (ix) {
+				case 0:
+					rule->keys = list;
+				break;
+
+				case 1:
+					rule->values = list;
+				break;
 			}
 		}
-
-		if (list != NULL) {
-			for (iter = list; *iter != NULL; ++iter) {
-				XPUSHs(sv_2mortal(newSVGChar(*iter)));
+		else {
+			AV *av = newAV();
+			if (list != NULL) {
+				gchar **iter;
+				for (iter = list; *iter != NULL; ++iter) {
+					av_push(av, newSVGChar(*iter));
+				}
 			}
-		}
 
-		switch (ix) {
-			case 0:
-				rule->keys = list;
-			break;
-
-			case 1:
-				rule->values = list;
-			break;
+			XPUSHs(sv_2mortal(newRV((SV *) av)));
 		}
 
 
