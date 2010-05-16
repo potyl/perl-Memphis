@@ -7,12 +7,27 @@ Memphis - Cairo based OSM renderer, it draws OpenStreet Maps
 =head1 SYNOPSIS
 
 	use Memphis;
+	
+	my $renderer = Memphis::Renderer->new();
+	
+	# Load the OSM map
+	my $map = Memphis::Map->new();
+	$map->load_from_file("map.osm.);
+	$renderer->set_map($map);
+	
+	# Load the OSM rules
+	my $rule_set = Memphis::RuleSet->new();
+	$rule_set->load_from_file("rules.xml");
+	$renderer->set_rule_set($rule_set);
+	
+	# Render the OSM map as a png file at zoom level 1
+	$renderer->draw_png("osm.png", 1);
 
 =head1 DESCRIPTION
 
-Memphis consists of the Perl bindings for the C library libmemphis which is a
-generic glib/cairo based OSM renderer library. It draws maps on arbitrary
-cairo surfaces.
+Memphis provides the Perl bindings for the C library libmemphis which is a
+generic glib/cairo based OSM renderer library. Basically it draws maps on
+arbitrary cairo surfaces.
 
 For more information about libmemphis see:
 L<https://trac.openstreetmap.ch/trac/memphis/wiki/LibMemphis>.
